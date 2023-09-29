@@ -2,8 +2,11 @@ import React from "react";
 import { Card, Form, Button, Input, Checkbox, message } from "antd";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { login, logout } from "../redux/slices/user";
 
 export default function Login() {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const onFinish = (values) => {
     console.log("Success:", values);
@@ -20,6 +23,12 @@ export default function Login() {
       .then((response) => {
         console.log(response);
         message.success(response.data.message);
+        dispatch(
+          login({
+            username: response.data.username,
+            isAuthenticated: response.data.success,
+          })
+        );
         navigate("/");
       })
       .catch((err) => {

@@ -6,9 +6,25 @@ require('dotenv').config();
 
 // is authenticated check
 
-router.post('/isauthenticated', (req,res)=>{
+router.get('/isauthenticated', (req,res)=>{
 
-    const token = req.headers.token
+    try {
+        const token = req.header('Authorization');
+
+        const decodedToken = jwt.verify(token, process.env.JWT_SECRET);
+
+        if(decodedToken) {
+
+            res.status(200).json({success: true,
+            message: "you are autheticated"})
+
+        } else{
+            res.status(401).json({success:false})
+        }
+
+    }catch (err){
+        res.status(401).json({success:false})
+    }
 })
 
 

@@ -41,13 +41,16 @@ function Auth() {
           })
           .catch((error) => {
             console.error("Error:", error);
+            Cookies.remove("token");
             navigate("/login");
           });
       } catch (error) {
         console.log(error + "User not logged in");
+        Cookies.remove("token");
         navigate("/login");
       }
     } else {
+      Cookies.remove("token");
       navigate("/login");
     }
   }, [isAuthenticated, navigate, dispatch]);

@@ -9,7 +9,7 @@ function Profile() {
       <div className="flex flex-row justify-center">
         <Card className=" w-1/4">
           <p className=" font-poppins">
-            This is a authenticated route. Non authenticated users can't access
+            This is an authenticated route. Non authenticated users can't access
             this page
           </p>
         </Card>

@@ -10,7 +10,7 @@ This login system uses JWT and will create a cookie on the frontend. Then, on ev
 - Redux Toolkit + Redux Saga
 - Axios
 
-## Used Packages Frontend
+## Used Packages Backend
 
 - ExpressJS
 - JWT

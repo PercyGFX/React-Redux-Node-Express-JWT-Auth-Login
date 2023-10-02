@@ -3,7 +3,7 @@ import { Outlet } from "react-router-dom";
 import Cookies from "js-cookie";
 import axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
-import { login } from "../redux/slices/user";
+import { authcheck } from "../redux/slices/user";
 import { useNavigate } from "react-router-dom";
 
 //check jwt and
@@ -23,27 +23,12 @@ function Auth() {
       const token = Cookies.get("token");
 
       try {
-        axios
-          .get("http://localhost:5000/isauthenticated", {
-            headers: {
-              Authorization: `${token}`,
-            },
+        console.log("caling SAAAAAAAAAAAAAGA");
+        dispatch(
+          authcheck({
+            token: token,
           })
-          .then((response) => {
-            console.log(response.data);
-
-            dispatch(
-              login({
-                username: response.data.username,
-                isAuthenticated: response.data.success,
-              })
-            );
-          })
-          .catch((error) => {
-            console.error("Error:", error);
-            Cookies.remove("token");
-            navigate("/login");
-          });
+        );
       } catch (error) {
         console.log(error + "User not logged in");
         Cookies.remove("token");
@@ -53,7 +38,7 @@ function Auth() {
       Cookies.remove("token");
       navigate("/login");
     }
-  }, [isAuthenticated, navigate, dispatch]);
+  }, [dispatch]);
 
   return <Outlet />;
 }

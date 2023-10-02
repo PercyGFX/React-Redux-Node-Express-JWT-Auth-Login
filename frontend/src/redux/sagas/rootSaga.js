@@ -1,7 +1,8 @@
 import { takeLatest } from "redux-saga/effects";
-import { login } from "../slices/user";
+import { authcheck } from "../slices/user";
 import { handleUserAuth } from "./handlers/user";
 
+// add reducers & handlers here
 export function* watcherSaga() {
-  yield takeLatest(login, handleUserAuth);
+  yield takeLatest(authcheck, handleUserAuth);
 }
